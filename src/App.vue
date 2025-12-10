@@ -1,11 +1,31 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div>
+    <div>
+      <button @click="addLike">Like</button>
+      <button @click="addDisLike">Dislike</button>
+    </div>
+    <div>Кол-во лайков: <strong>{{ likes }}</strong></div>
+    <div>Кол-во дизлайков: <strong>{{ dislikes }}</strong></div>
+  </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      likes: 0,
+      dislikes: 5,
+    }
+  },
+  methods: {
+    addLike() {
+      this.likes += 1;
+    },
+    addDisLike() {
+      this.dislikes += 1;
+    }
+  }
+}
+</script>
 
 <style scoped></style>
