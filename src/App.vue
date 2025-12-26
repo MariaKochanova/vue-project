@@ -1,10 +1,12 @@
 <template>
   <div class="app">
-    <form class="form">
+    <form @submit.prevent class="form">
       <h4>Создание поста</h4>
-      <input class="input" type="text" placeholder="Название">
-      <input class="input" type="text" placeholder="Опиание">
-      <button class="btn" @click="createPost">Создать</button>
+      <input v-bind:value="title" @input="title = $event.target.value" class="input" type="text" placeholder="Название">
+      <input v-bind:value="body" @input="body = $event.target.value" class="input" type="text" placeholder="Опиание">
+      <button class="btn" @click="createPost">
+        Создать
+      </button>
     </form>
     <div class="post" v-for="post in posts">
       <div><strong>Название:</strong> {{ post.title }}</div>
@@ -22,11 +24,22 @@ export default {
         { id: 2, title: 'JavaScript 2', body: 'Описание поста 2' },
         { id: 3, title: 'JavaScript 3', body: 'Описание поста 3' },
         { id: 4, title: 'JavaScript 4', body: 'Описание поста 4' },
-      ]
+      ],
+      title: '',
+      body: '',
     }
   },
   methods: {
-
+    createPost() {
+      const newPost = {
+        id: Date.now(),
+        title: this.title,
+        body: this.body,
+      }
+      this.posts.push(newPost);
+      this.title = '';
+      this.body = '';
+    }
   }
 }
 </script>
